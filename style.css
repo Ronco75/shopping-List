@@ -32,12 +32,11 @@ header h1{
 .input-div input{
     width: 100%;
     font-size: 18px;
-    padding: 3px;
+    padding: 10px;
     border-radius: 5px;
     border: 1px solid #333;
     outline: none;
 }
-
 
 .btn{
     cursor: pointer;
@@ -58,3 +57,67 @@ header h1{
 .btn:active {
   transform: translateY(0);
 }
+
+.form-input-filter {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #333;
+    background: transparent;
+    outline: none;
+  }
+
+  .btn-clear {
+    margin-top: 20px;
+    width: 100%;
+    font-size: 16px;
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .btn-clear:hover {
+    background-color: #fff;
+  }
+
+  .btn-link {
+    font-size: 16px;
+    background-color: transparent;
+    color: #333;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  .text-red {
+    color: red;
+  }
+
+  .items {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .items li {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 0 5px 20px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  i{
+    border: none;
+    background-color: transparent;
+  }
