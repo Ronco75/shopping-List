@@ -38,7 +38,7 @@ header h1{
     outline: none;
 }
 
-.btn{
+.btn-add{
     cursor: pointer;
     border: none;
     border-radius: 5px;
@@ -48,13 +48,13 @@ header h1{
     font-size: 16px;
 }
 
-.btn:hover{
+.btn-add:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     opacity: .9;
     transform: translateY(-1px);
 }
 
-.btn:active {
+.btn-add:active {
   transform: translateY(0);
 }
 
@@ -115,9 +115,5 @@ header h1{
     margin: 0 5px 20px;
     font-weight: 700;
     cursor: pointer;
-  }
-
-  i{
-    border: none;
-    background-color: transparent;
+    color: #fff;
   }
