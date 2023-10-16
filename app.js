@@ -4,17 +4,21 @@ const clearBtn = document.querySelector('.btn-clear');
 const itemList = document.querySelector('#item-list');
 const filter = document.querySelector('.filter');
 const removeBtn = document.querySelector('.remove-item');
+const form = document.querySelector('.item-form');
 
 // Hide/Show UI
-const items = document.querySelectorAll('li');
-if(items.length === 0) {
-    clearBtn.style.display = 'none';
-    filter.style.display = 'none';
-} else {
-    clearBtn.style.display = 'block';
-    filter.style.display = 'block';
+const checkUI = () => {
+    const items = document.querySelectorAll('li');
+    if(items.length === 0) {
+        clearBtn.style.display = 'none';
+        filter.style.display = 'none';
+    } else {
+        clearBtn.style.display = 'block';
+        filter.style.display = 'block';
+    }
 }
-
+    
+//Add Item on sumbit
 const onSubmit = (e) => {
     e.preventDefault();
     const newItem = input.value;
@@ -24,11 +28,11 @@ const onSubmit = (e) => {
     }
 
     addItem(newItem);
-
+    checkUI();
     input.value = '';
 }
 
-//Add Item
+//Add Item function
 const addItem = (item) => {
     const li = document.createElement('li');
     li.appendChild(document.createTextNode(item));
@@ -55,9 +59,25 @@ function createIcon(classes) {
     return icon;
 }
 
+//Remove Item
+const removeItem = (e) => {
+    if(e.target.parentElement.classList.contains('remove-item')){
+        e.target.parentElement.parentElement.remove();
+    }
+    checkUI();
+}
+
+//Clear All Items
+const clearItems = () => {
+    while (itemList.firstChild) {
+        itemList.removeChild(itemList.firstChild);
+    }
+
+    checkUI();
+}
+
   //Event Listeners
-addBtn.addEventListener('click', onSubmit);
-
-
-
+form.addEventListener('submit', onSubmit);
+itemList.addEventListener('click', removeItem);
+clearBtn.addEventListener('click', clearItems);
 
