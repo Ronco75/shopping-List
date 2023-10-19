@@ -2,7 +2,7 @@ const input = document.querySelector('#input');
 const addBtn = document.querySelector('.btn-add');
 const clearBtn = document.querySelector('.btn-clear');
 const itemList = document.querySelector('#item-list');
-const filter = document.querySelector('.filter');
+const filter = document.querySelector('#filter');
 const removeBtn = document.querySelector('.remove-item');
 const form = document.querySelector('.item-form');
 
@@ -62,7 +62,9 @@ function createIcon(classes) {
 //Remove Item
 const removeItem = (e) => {
     if(e.target.parentElement.classList.contains('remove-item')){
-        e.target.parentElement.parentElement.remove();
+        if(confirm('Are you sure?')) {
+            e.target.parentElement.parentElement.remove();
+        }
     }
     checkUI();
 }
@@ -76,8 +78,23 @@ const clearItems = () => {
     checkUI();
 }
 
+// Filter Items
+const filterItems = (e) => {
+    const items = document.querySelectorAll('li');
+    const text = e.target.value.toLowerCase();
+
+    items.forEach((item) => {
+        const itemName = item.firstChild.textContent.toLowerCase();
+        
+        itemName.indexOf(text) != -1 ?
+         item.style.display = 'flex' :
+         item.style.display = 'none';
+         
+    })
+}
+
   //Event Listeners
 form.addEventListener('submit', onSubmit);
 itemList.addEventListener('click', removeItem);
 clearBtn.addEventListener('click', clearItems);
-
+filter.addEventListener('input', filterItems);
