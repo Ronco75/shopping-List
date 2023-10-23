@@ -5,9 +5,12 @@ const itemList = document.querySelector('#item-list');
 const filter = document.querySelector('#filter');
 const removeBtn = document.querySelector('.remove-item');
 const form = document.querySelector('.item-form');
+let editMode = false;
 
 // Hide/Show UI
 const checkUI = () => {
+    input.value = '';
+
     const items = document.querySelectorAll('li');
     if(items.length === 0) {
         clearBtn.style.display = 'none';
@@ -16,6 +19,11 @@ const checkUI = () => {
         clearBtn.style.display = 'block';
         filter.style.display = 'block';
     }
+    
+    addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Add Item';
+    addBtn.style.backgroundColor = '#333';
+
+    editMode = false;
 }
 
 // Display Item on DOMContentLoaded
@@ -32,6 +40,14 @@ const onSubmit = (e) => {
     if(newItem === '') {
         alert('Please add Item');
         return;
+    }
+
+    if(editMode) {
+        const itemToEdit = itemList.querySelector('.edit-mode');
+        removeItemFromStorage(itemToEdit.textContent);
+        itemToEdit.classList.remove('edit-mode');
+        itemToEdit.remove();
+        editMode = false;
     }
 
     addItem(newItem);
@@ -79,7 +95,25 @@ function createIcon(classes) {
 const onClickItem = (e) => {
     if (e.target.parentElement.classList.contains('remove-item')) {
         removeItem(e.target.parentElement.parentElement);
+    } else {
+        editItem(e.target);
     }
+}
+
+//Edit Item
+const editItem = (item) => {
+    editMode = true;
+
+    itemList
+    .querySelectorAll('li')
+    .forEach((i) => i.classList.remove('edit-mode'));
+
+    item.style.color = '#333';
+    item.classList.add('edit-mode');
+    addBtn.innerHTML = '<i class="fa-solid fa-pen"></i>   Update Item';
+    addBtn.style.backgroundColor = '#228B22';
+    input.value = item.textContent;
+
 }
 
 //Remove Item function
@@ -113,13 +147,14 @@ const getItemsFromStorage = () => {
 
 //Clear All Items
 const clearItems = () => {
-    while (itemList.firstChild) {
-        itemList.removeChild(itemList.firstChild);
+    if(confirm('Clear All Items?')) {
+        while (itemList.firstChild) {
+         //Clear all Items from UI
+         itemList.removeChild(itemList.firstChild);
+     }
+        //Clear all Items from local storage
+        localStorage.removeItem('items');
     }
-
-    //Clear all Items from local storage
-    localStorage.removeItem('items');
-
     checkUI();
 }
 

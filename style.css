@@ -121,3 +121,7 @@ header h1{
     cursor: pointer;
     color: #fff;
   }
+
+  .edit-mode {
+    color: #ccc;
+  }
